@@ -1,0 +1,13 @@
+---
+permalink: index.html
+---
+
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+  <h1>Hello world</h1>
+
+  {% for category in collections.blogCategories %}
+    <p><a href="/blog/category/{{ category | slug }}">{{ category }}</a></p>
+  {% endfor %}
+{% endblock %}

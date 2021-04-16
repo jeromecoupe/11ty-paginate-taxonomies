@@ -1,0 +1,18 @@
+{
+  "name": "sanbox-11ty-paginate-categories",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx eleventy --quiet",
+    "watch": "npx eleventy --serve  --quiet",
+    "dev": "npm run watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  }
+}

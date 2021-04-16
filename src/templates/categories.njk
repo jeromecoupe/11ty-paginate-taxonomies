@@ -1,0 +1,32 @@
+---
+pagination:
+  data: collections.blogpostsByCategories
+  size: 1
+  alias: category
+permalink: /blog/category/{{ category.name | slug }}{% if category.currentPage > 1 %}/{{ category.currentPage }}{% endif %}/index.html
+---
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+  <h1>{{ category.name }}</h1>
+
+  {% for post in category.items %}
+    {% if loop.first %}<ul>{% endif %}
+      <li>
+        <article>
+          <h2><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+        </article>
+      </li>
+    {% if loop.last %}</ul>{% endif %}
+  {% endfor %}
+
+  {% if category.totalPages > 1 %}
+    {% if category.currentPage > 1 %}
+      <p><a href="/blog/category/{{ category.name | slug }}{% if category.currentPage > 2 %}/{{ category.currentPage - 1 }}{% endif %}/">Previous</a></p>
+    {% endif %}
+    {% if category.currentPage < category.totalPages %}
+      <p><a href="/blog/category/{{ category.name | slug }}/{{ category.currentPage + 1 }}/">Next</a></p>
+    {% endif %}
+  {% endif %}
+
+{% endblock %}
