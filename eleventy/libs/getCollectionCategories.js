@@ -11,5 +11,14 @@ module.exports = (collection) => {
       a.localeCompare(b);
     });
   const uniqueCategories = [...new Set(collectionCategories)];
-  return uniqueCategories;
+  const categories = uniqueCategories.map((category) => {
+    const postsInCategory = collection.filter((item) =>
+      item.data.categories.includes(category)
+    );
+    return {
+      title: category,
+      totalItems: postsInCategory.length,
+    };
+  });
+  return categories;
 };

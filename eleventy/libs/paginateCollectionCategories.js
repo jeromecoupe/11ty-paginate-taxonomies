@@ -55,17 +55,21 @@ const formatCategory = (category, items, index, postsInCat, pageSize) => {
  */
 module.exports = (collection, collectionCategories, itemsPerPage) => {
   // walk unique categories
-  const paginatedCollectionByCategories = collectionCategories.flatMap((category) => {
-    const postsInCategory = collection.filter((item) =>
-      item.data.categories.includes(category)
-    );
+  const paginatedCollectionByCategories = collectionCategories.flatMap(
+    (category) => {
+      const postsInCategory = collection.filter((item) =>
+        item.data.categories.includes(category)
+      );
 
-    // chunked
-    const chunckedCollection = lodash.chunk(postsInCategory, itemsPerPage);
+      // chunked
+      const chunckedCollection = lodash.chunk(postsInCategory, itemsPerPage);
 
-    // format collection
-    return chunckedCollection.map((items, index) => formatCategory(category, items, index, postsInCategory, itemsPerPage));
-  });
+      // format collection
+      return chunckedCollection.map((items, index) =>
+        formatCategory(category, items, index, postsInCategory, itemsPerPage)
+      );
+    }
+  );
 
   // return array of objects
   return paginatedCollectionByCategories;
