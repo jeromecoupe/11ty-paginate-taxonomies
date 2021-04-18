@@ -2,15 +2,15 @@
 pagination:
   data: collections.blogpostsByCategories
   size: 1
-  alias: category
-permalink: /blog/category/{{ category.name | slug }}{% if category.currentPage > 1 %}/{{ category.currentPage }}{% endif %}/index.html
+  alias: currentCategory
+permalink: /blog/category/{{ currentCategory.slug }}{% if currentCategory.currentPage > 1 %}/{{ currentCategory.currentPage }}{% endif %}/index.html
 ---
 {% extends "layouts/base.njk" %}
 
 {% block content %}
-  <h1>{{ category.name }}</h1>
+  <h1>{{ currentCategory.title }}</h1>
 
-  {% for post in category.items %}
+  {% for post in currentCategory.items %}
     {% if loop.first %}<ul>{% endif %}
       <li>
         <article>
@@ -20,12 +20,12 @@ permalink: /blog/category/{{ category.name | slug }}{% if category.currentPage >
     {% if loop.last %}</ul>{% endif %}
   {% endfor %}
 
-  {% if category.totalPages > 1 %}
-    {% if category.currentPage > 1 %}
-      <p><a href="/blog/category/{{ category.name | slug }}{% if category.currentPage > 2 %}/{{ category.currentPage - 1 }}{% endif %}/">Previous</a></p>
+  {% if currentCategory.totalPages > 1 %}
+    {% if currentCategory.currentPage > 1 %}
+      <p><a href="/blog/category/{{ currentCategory.slug }}{% if currentCategory.currentPage > 2 %}/{{ currentCategory.currentPage - 1 }}{% endif %}/">Previous</a></p>
     {% endif %}
-    {% if category.currentPage < category.totalPages %}
-      <p><a href="/blog/category/{{ category.name | slug }}/{{ category.currentPage + 1 }}/">Next</a></p>
+    {% if currentCategory.currentPage < currentCategory.totalPages %}
+      <p><a href="/blog/category/{{ currentCategory.slug }}/{{ currentCategory.currentPage + 1 }}/">Next</a></p>
     {% endif %}
   {% endif %}
 
