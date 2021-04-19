@@ -1,5 +1,5 @@
 const getCollectionCategories = require("../libs/getCollectionCategories.js");
-const paginateCollectionCategories = require("../libs/paginateCollectionByCategories");
+const paginateCollectionByCategories = require("../libs/paginateCollectionByCategories");
 
 module.exports = function (collection) {
   // number of items per page
@@ -11,7 +11,7 @@ module.exports = function (collection) {
   // categories in tragetted collection
   const blogpostsCategories = getCollectionCategories(blogposts);
   // paginated collection
-  return paginateCollectionCategories(
+  return paginateCollectionByCategories(
     blogposts,
     blogpostsCategories,
     itemsPerPage

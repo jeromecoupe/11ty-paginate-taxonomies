@@ -3,7 +3,7 @@ pagination:
   data: collections.blogpostsByCategories
   size: 1
   alias: currentCategory
-permalink: /blog/category/{{ currentCategory.slug }}{% if currentCategory.currentPage > 1 %}/{{ currentCategory.currentPage }}{% endif %}/index.html
+permalink: /blog/category/{{ currentCategory.slug }}/index.html
 ---
 {% extends "layouts/base.njk" %}
 
@@ -21,11 +21,11 @@ permalink: /blog/category/{{ currentCategory.slug }}{% if currentCategory.curren
   {% endfor %}
 
   {% if currentCategory.totalPages > 1 %}
-    {% if currentCategory.currentPage > 1 %}
-      <p><a href="/blog/category/{{ currentCategory.slug }}{% if currentCategory.currentPage > 2 %}/{{ currentCategory.currentPage - 1 }}{% endif %}/">Previous</a></p>
+    {% if currentCategory.hrefs.previous %}
+      <p><a href="/blog/category/{{ currentCategory.hrefs.previous }}">Previous</a></p>
     {% endif %}
-    {% if currentCategory.currentPage < currentCategory.totalPages %}
-      <p><a href="/blog/category/{{ currentCategory.slug }}/{{ currentCategory.currentPage + 1 }}/">Next</a></p>
+    {% if currentCategory.hrefs.next %}
+      <p><a href="/blog/category/{{ currentCategory.hrefs.next }}">Next</a></p>
     {% endif %}
   {% endif %}
 
