@@ -20,7 +20,7 @@ The sample code uses a `blogposts` collection as an example.
 
 ### Get collection categories
 
-- `./eleventy/libs/getCollectionCategories.js` is responsible for returning an array of all unique `categories` values used in the front-matter of the targetted collection.
+- `./eleventy/libs/getCollectionCategories.js` is responsible for returning an array of all unique `categories` values used in the front-matter of the target collection.
 
 #### Parameters
 
@@ -32,7 +32,7 @@ Returns an array of objects. Each of the returned objects contains a `title`, a 
 
 - `title`: title of the category as specified in the front-matter
 - `slug`: slug of the category
-- `itemsNumber` number of items in the category
+- `itemsNumber`: number of items in the category
 
 ### Paginate collection category
 
@@ -40,13 +40,13 @@ Returns an array of objects. Each of the returned objects contains a `title`, a 
 
 #### Parameters
 
-- `collection`: : the collection of items you want to create a new collection from using categories as keys. That new collection can be paginated using an Eleventy `pagination` with a size of `1.
-- `collectionCategories`: the array of unique values for the `categories`values in the front matter of the targetted collection.
-- `itemsPerPage`: the number of items you want on each paginated pages.
+- `collection`: the target collection from which the new paginated categories collection will be created. That new collection can be paginated using an Eleventy `pagination` with a size of `1.
+- `collectionCategories`: the array of unique values for the `categories`values in the front matter of the target collection.
+- `itemsPerPage`: the number of items per paginated pages.
 
 #### Returns
 
-Returns an array of objects. Each object is a page of results
+Returns an array of objects. Each object is a page of results for the target collection.
 
 - `title`: category,
 - `slug`: slug,
