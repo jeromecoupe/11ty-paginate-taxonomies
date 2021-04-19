@@ -8,6 +8,10 @@ permalink: index.html
   <h1>Hello world</h1>
 
   {% for category in collections.blogCategories %}
-    <p><a href="/blog/category/{{ category }}">{{ category }} ({{ category.totalItems }})</a></p>
+    {% if loop.first %}<ul>{% endif %}
+    <li>
+      <a href="/blog/category/{{ category.slug }}">{{ category.title }} ({{ category.totalItems }})</a>
+    </li>
+    {% if loop.last %}</ul>{% endif %}
   {% endfor %}
 {% endblock %}

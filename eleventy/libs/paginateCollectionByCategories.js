@@ -15,29 +15,29 @@ const lodash = require("lodash");
  *
  * [{
  *		title: "travel",
- *    slug: "travel/1"
+ *    slug: "travel"
  *		currentPage: 1,
  *    totalItems: 2,
  *    totalPages: 1,
  *		items: [{ Object }, { Object }]
  *    slugs: {
  *      all: [Array],
- *      first: travel/1,
- *      last: travel/1,
+ *      first: travel,
+ *      last: travel,
  *      next: null,
  *      previous: null,
  *    }
  *	},
  *  {
  *		title: "code",
- *    slug: "code/1"
+ *    slug: "code"
  *		currentPage: 1,
  *    totalItems: 3,
  *    totalPages: 2,
  *		items: [{ Object }, { Object }]
  *    slugs: {
  *      all: [Array],
- *      first: code/1,
+ *      first: code,
  *      last: code/2,
  *      next: code/2,
  *      previous: null,
@@ -52,10 +52,10 @@ const lodash = require("lodash");
  *		items: [{ Object }],
  *    slugs: {
  *      all: [Array],
- *      first: code/1,
+ *      first: code,
  *      last: code/2,
  *      next: null,
- *      previous: code/1,
+ *      previous: code,
  *    }
  *	}]
  */
@@ -77,6 +77,10 @@ module.exports = (collection, collectionCategories, itemsPerPage) => {
     const slugs = [];
     for (let i = 1; i <= chunkedCollection.length; i++) {
       let slug = `${category.slug}/${i}`;
+      if (i === 1) {
+        slug = category.slug;
+      }
+
       slugs.push(slug);
     }
 
@@ -89,7 +93,7 @@ module.exports = (collection, collectionCategories, itemsPerPage) => {
         totalItems: postsInCategory.length,
         totalPages: Math.ceil(postsInCategory.length / itemsPerPage),
         items: items,
-        slugs: {
+        hrefs: {
           all: slugs,
           first: slugs[0],
           last: slugs[slugs.length - 1],
@@ -101,5 +105,6 @@ module.exports = (collection, collectionCategories, itemsPerPage) => {
   });
 
   // return array of objects
+  console.log(paginatedCollectionByCategories);
   return paginatedCollectionByCategories;
 };

@@ -10,6 +10,12 @@ That new collection can then be paginated using `pagination` with a size of `1` 
 
 The sample code uses a `blogposts` collection as an example.
 
+## Installation
+
+- run `npm install`
+- run `npm build` to build pages
+- run `npm watch` for local development
+
 ## Documentation
 
 ### Get collection categories
@@ -20,9 +26,13 @@ The sample code uses a `blogposts` collection as an example.
 
 - `collection`: the actual collection of items you want to extract an array of unique categories from. This collection can be defined as usual, using `tags` or other methods like `getFilteredByGlob()`.
 
-#### Returned array of objects
+#### Returns
 
-- returns an array of objects. Each of the returned objects contains a `title` and an `itemsNumber` keys. `title` is the title of the category as specified in the front-matter, while `itemsNumber` returns the umber of items in each category.
+Returns an array of objects. Each of the returned objects contains a `title`, a `slug` and an `itemsNumber` keys.
+
+- `title`: title of the category as specified in the front-matter
+- `slug`: slug of the category
+- `itemsNumber` number of items in the category
 
 ### Paginate collection category
 
@@ -34,7 +44,9 @@ The sample code uses a `blogposts` collection as an example.
 - `collectionCategories`: the array of unique values for the `categories`values in the front matter of the targetted collection.
 - `itemsPerPage`: the number of items you want on each paginated pages.
 
-#### Returned array of objects
+#### Returns
+
+Returns an array of objects. Each object is a page of results
 
 - `title`: category,
 - `slug`: slug,
@@ -42,9 +54,9 @@ The sample code uses a `blogposts` collection as an example.
 - `totalItems`: the total number of paginated items,
 - `totalPages`: the total number of pages,
 - `items`: the items on the current page,
-- `slugs`
-  - `all`: all the slugs in order,
-  - `first`: first slug,
-  - `last`: last slug,
-  - `next`: next slug,
-  - `previous`: previous slug,
+- `hrefs`
+  - `all`: all pagination hrefs in order,
+  - `first`: first href,
+  - `last`: last href,
+  - `next`: next href,
+  - `previous`: previous href,

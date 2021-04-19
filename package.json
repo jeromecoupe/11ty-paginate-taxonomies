@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "rimraf dist/",
     "build": "npx eleventy --quiet",
-    "watch": "npx eleventy --serve  --quiet",
+    "watch": "npx eleventy --serve",
     "dev": "npm run watch"
   },
   "keywords": [],
@@ -14,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
+    "rimraf": "^2.7.1",
     "slugify": "^1.5.0"
   }
 }
