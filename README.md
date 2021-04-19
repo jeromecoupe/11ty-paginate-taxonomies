@@ -5,7 +5,8 @@ This uses Eleventy to:
 1. create a collection using a custom `categories` taxonomy
 2. create a collection of all unique categories used throughout that collection
 3. create a new collection of each categories and the posts belonging to it using [Zach's method](https://github.com/11ty/eleventy/issues/332#issuecomment-445236776)
-4. That new collection can then be paginated using `pagination` with a size of `1` to create paginated lists of items in each category.
+
+That new collection can then be paginated using `pagination` with a size of `1` to create paginated lists of items in each category.
 
 The sample code uses a `blogposts` collection as an example.
 
@@ -13,7 +14,7 @@ The sample code uses a `blogposts` collection as an example.
 
 ### Get collection categories
 
-`./eleventy/libs/getCollectionCategories.js`: is responsible for returning an array of all unique `categories` values used in the front-matter of the targetted collection.
+- `./eleventy/libs/getCollectionCategories.js` is responsible for returning an array of all unique `categories` values used in the front-matter of the targetted collection.
 
 #### Parameters
 
@@ -25,16 +26,25 @@ The sample code uses a `blogposts` collection as an example.
 
 ### Paginate collection category
 
-- `./eleventy/libs/getCollectionCategories.js`: is responsible for creating a new collection of items using categories as keys that can be paginated.
+- `./eleventy/libs/getCollectionCategories.js` is responsible for creating a new collection of items using categories as keys that can be paginated.
 
 #### Parameters
 
-`collection`: : the collection of items you want to create a new collection from using categories as keys. That new collection can be paginated using an Eleventy `pagination` with a size of `1. `collectionCategories`: the array of unique values for the `categories`values in the front matter of the targetted collection.`itemsPerPage`: the number of items you want on each paginated pages.
+- `collection`: : the collection of items you want to create a new collection from using categories as keys. That new collection can be paginated using an Eleventy `pagination` with a size of `1.
+- `collectionCategories`: the array of unique values for the `categories`values in the front matter of the targetted collection.
+- `itemsPerPage`: the number of items you want on each paginated pages.
 
 #### Returned array of objects
 
 - `title`: category,
+- `slug`: slug,
 - `currentPage`: the current page in the pagination,
 - `totalItems`: the total number of paginated items,
 - `totalPages`: the total number of pages,
 - `items`: the items on the current page,
+- `slugs`
+  - `all`: all the slugs in order,
+  - `first`: first slug,
+  - `last`: last slug,
+  - `next`: next slug,
+  - `previous`: previous slug,
