@@ -21,12 +21,18 @@ permalink: /blog/category/{{ currentCategory.slug }}/index.html
   {% endfor %}
 
   {% if currentCategory.totalPages > 1 %}
-    {% if currentCategory.hrefs.previous %}
-      <p><a href="/blog/category/{{ currentCategory.hrefs.previous }}">Previous</a></p>
-    {% endif %}
-    {% if currentCategory.hrefs.next %}
-      <p><a href="/blog/category/{{ currentCategory.hrefs.next }}">Next</a></p>
-    {% endif %}
+    <nav>
+      <ul>
+        {% if currentCategory.hrefs.previous %}
+          <li><a href="/blog/category/{{ currentCategory.hrefs.first }}">First</a></li>
+          <li><a href="/blog/category/{{ currentCategory.hrefs.previous }}">Previous</a></li>
+        {% endif %}
+        {% if currentCategory.hrefs.next %}
+          <li><a href="/blog/category/{{ currentCategory.hrefs.next }}">Next</a></li>
+          <li><a href="/blog/category/{{ currentCategory.hrefs.last }}">Last</a></li>
+        {% endif %}
+      </ul>
+    </nav>
   {% endif %}
 
 {% endblock %}

@@ -105,6 +105,5 @@ module.exports = (collection, collectionCategories, itemsPerPage) => {
   });
 
   // return array of objects
-  console.log(paginatedCollectionByCategories);
   return paginatedCollectionByCategories;
 };
