@@ -8,9 +8,9 @@ module.exports = function (collection) {
   const blogposts = collection.getFilteredByGlob(
     "./src/content/blogposts/*.md"
   );
-  // categories in tragetted collection
+  // unique categories in target collection
   const blogpostsCategories = getCollectionCategories(blogposts);
-  // paginated collection
+  // paginated collection by categories
   return paginateCollectionByCategories(
     blogposts,
     blogpostsCategories,
