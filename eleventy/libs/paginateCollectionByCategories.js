@@ -8,56 +8,59 @@ const lodash = require("lodash");
  * @param {Number} itemsPerPage the number of items you want per page
  * @returns {Array} - array of objects
  *
- * Returned data looks like this
+ * Returned data structure:
+ *
  * - itemsPerPage is 2
  * - there are 2 items in the travel category
  * - there are 3 items in the code category
  *
- * [{
- *		title: "travel",
- *    slug: "travel"
- *		currentPage: 1,
- *    totalItems: 2,
- *    totalPages: 1,
- *		items: [{ Object }, { Object }]
- *    slugs: {
- *      all: [Array],
- *      first: travel,
- *      last: travel,
- *      next: null,
- *      previous: null,
- *    }
- *	},
- *  {
- *		title: "code",
- *    slug: "code"
- *		currentPage: 1,
- *    totalItems: 3,
- *    totalPages: 2,
- *		items: [{ Object }, { Object }]
- *    slugs: {
- *      all: [Array],
- *      first: code,
- *      last: code/2,
- *      next: code/2,
- *      previous: null,
- *    }
- *	},
- *  {
- *		title: "code",
- *    slug: "code/2"
- *		currentPage: 2,
- *    totalItems: 3,
- *    totalPages: 2,
- *		items: [{ Object }],
- *    slugs: {
- *      all: [Array],
- *      first: code,
- *      last: code/2,
- *      next: null,
- *      previous: code,
- *    }
- *	}]
+ * [
+ *   {
+ *     title: "travel",
+ *     slug: "travel"
+ *     currentPage: 1,
+ *     totalItems: 2,
+ *     totalPages: 1,
+ *     items: [{ Object }, { Object }]
+ *     slugs: {
+ *       all: [Array],
+ *       first: travel,
+ *       last: travel,
+ *       next: null,
+ *       previous: null,
+ *     }
+ *   },
+ *   {
+ *     title: "code",
+ *     slug: "code"
+ *     currentPage: 1,
+ *     totalItems: 3,
+ *     totalPages: 2,
+ *     items: [{ Object }, { Object }]
+ *     slugs: {
+ *       all: [Array],
+ *       first: code,
+ *       last: code/2,
+ *       next: code/2,
+ *       previous: null,
+ *     }
+ *   },
+ *   {
+ *     title: "code",
+ *     slug: "code/2"
+ *     currentPage: 2,
+ *     totalItems: 3,
+ *     totalPages: 2,
+ *     items: [{ Object }],
+ *     slugs: {
+ *       all: [Array],
+ *       first: code,
+ *       last: code/2,
+ *       next: null,
+ *       previous: code,
+ *     }
+ *   }
+ * ]
  */
 module.exports = (collection, collectionCategories, itemsPerPage) => {
   // create empty array

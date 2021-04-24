@@ -35,13 +35,11 @@ module.exports = (collection) => {
     const postsInCategory = collection.filter((item) =>
       item.data.categories.includes(category)
     );
-    const formattedCategory = {
+    return {
       title: category,
       slug: strToSlug(category),
       totalItems: postsInCategory.length,
     };
-
-    return formattedCategory;
   });
 
   return categories;
