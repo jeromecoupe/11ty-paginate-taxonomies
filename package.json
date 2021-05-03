@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rimraf dist/",
-    "build": "npx eleventy --quiet",
-    "watch": "npx eleventy --serve",
+    "build": "npx @11ty/eleventy --quiet",
+    "watch": "npx @11ty/eleventy --serve",
     "dev": "npm run watch"
   },
   "keywords": [],
