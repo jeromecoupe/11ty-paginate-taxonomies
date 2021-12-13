@@ -1,14 +1,12 @@
 {
   "name": "sanbox-11ty-paginate-categories",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Paginating categories with Eleventy",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rimraf dist/",
     "build": "npx @11ty/eleventy --quiet",
-    "watch": "npx @11ty/eleventy --serve",
-    "dev": "npm run watch"
+    "dev": "npx @11ty/eleventy --serve"
   },
   "keywords": [],
   "author": "",

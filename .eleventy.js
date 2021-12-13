@@ -7,14 +7,26 @@ module.exports = function (eleventyConfig) {
 
   // blogposts unique categories
   eleventyConfig.addCollection(
-    "blogCategories",
+    "blogpostsCategories",
     require("./src/_11ty/collections/blogpostsCategories.js")
+  );
+
+  // blogposts unique themes
+  eleventyConfig.addCollection(
+    "blogpostsThemes",
+    require("./src/_11ty/collections/blogpostsThemes.js")
   );
 
   // blogposts by categories
   eleventyConfig.addCollection(
     "blogpostsByCategories",
     require("./src/_11ty/collections/blogpostsByCategories.js")
+  );
+
+  // blogposts by categories
+  eleventyConfig.addCollection(
+    "blogpostsByThemes",
+    require("./src/_11ty/collections/blogpostsByThemes.js")
   );
 
   return {

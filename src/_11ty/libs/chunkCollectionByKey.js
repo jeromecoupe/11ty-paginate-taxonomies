@@ -1,19 +1,19 @@
-const lodash = require("lodash");
+const chunk = require("lodash/chunk");
+const getCollectionKeyValues = require("./getCollectionKeyValues.js");
 
 /**
  * Returns a chunked array of objects representing
  * categories with posts in each object
- * @param {Array} collection the collection to use
- * @param {Array} collectionCategories the unique categories in that collection
- * @param {Number} itemsPerPage the number of items you want per page
- * @returns {Array} - array of objects
+ * @param {Array} collection - the collection to use
+ * @param {String} key - key to paginate the collection by
+ * @param {Number} itemsPerPage - the number of items you want per page (defaults to 10)
+ * @returns {Array} - chunked array of objects
  *
  * Returned data structure:
  *
  * - itemsPerPage is 2
- * - there are 2 items in the travel category
- * - there are 3 items in the code category
- *
+ * - there are 2 items including "travel" as a value for the passed key
+ * - there are 3 items including "code" as a value for the passed key
  * [
  *   {
  *     title: "travel",
@@ -62,42 +62,44 @@ const lodash = require("lodash");
  *   }
  * ]
  */
-module.exports = (collection, collectionCategories, itemsPerPage) => {
+module.exports = (collection, key, itemsPerPage = 10) => {
   // create empty array
-  const paginatedCollectionByCategories = [];
+  let paginatedCollection = [];
 
-  // walk unique categories
-  collectionCategories.forEach((category) => {
-    // get posts in category
-    const postsInCategory = collection.filter((item) =>
-      item.data.categories.includes(category.title)
+  // get unique key values
+  let uniqueKeyValues = getCollectionKeyValues(collection, key);
+
+  // walk unique key values
+  uniqueKeyValues.forEach((value) => {
+    // get posts with value in targetted key values
+    let itemsWithKeyValues = collection.filter(
+      (item) => key in item.data && item.data[key].includes(value.title)
     );
 
-    // chunk posts in category to create pages
-    const chunkedCollection = lodash.chunk(postsInCategory, itemsPerPage);
+    // chunk posts in category to create pages (lodash)
+    let chunkedCollection = chunk(itemsWithKeyValues, itemsPerPage);
 
     // create array of slugs
-    const slugs = [];
+    let slugs = [];
     for (let i = 1; i <= chunkedCollection.length; i++) {
-      let slug = `${category.slug}/${i}`;
+      let slug = `${value.slug}/${i}`;
       if (i === 1) {
-        slug = category.slug;
+        slug = value.slug;
       }
-
       slugs.push(slug);
     }
 
     // add formatted objects to empty array
     chunkedCollection.forEach((items, index) => {
-      paginatedCollectionByCategories.push({
-        title: category.title,
+      paginatedCollection.push({
+        title: value.title,
         slug: slugs[index],
         currentPage: index + 1,
-        totalItems: postsInCategory.length,
-        totalPages: Math.ceil(postsInCategory.length / itemsPerPage),
+        totalPages: Math.ceil(itemsWithKeyValues.length / itemsPerPage),
+        totalItems: itemsWithKeyValues.length,
         items: items,
-        hrefs: {
-          all: slugs,
+        hrefs: slugs,
+        href: {
           first: slugs[0],
           last: slugs[slugs.length - 1],
           next: slugs[index + 1] ?? null,
@@ -108,5 +110,5 @@ module.exports = (collection, collectionCategories, itemsPerPage) => {
   });
 
   // return array of objects
-  return paginatedCollectionByCategories;
+  return paginatedCollection;
 };

@@ -1,5 +1,5 @@
 ---
-title: my awesome blogpost
+title: last blogpost
 categories: ["test", "static site generators"]
 ---
 

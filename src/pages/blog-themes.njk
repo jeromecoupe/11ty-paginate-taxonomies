@@ -1,0 +1,73 @@
+---
+pagination:
+  data: collections.blogpostsByThemes
+  size: 1
+  alias: currentTheme
+permalink: /blog/theme/{{ currentTheme.slug }}/index.html
+---
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+  <h1>Blogposts in: {{ currentTheme.title }}</h1>
+
+  {% for post in currentTheme.items %}
+    {% if loop.first %}<ul>{% endif %}
+      <li>
+        <article>
+          <h2><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+        </article>
+      </li>
+    {% if loop.last %}</ul>{% endif %}
+  {% endfor %}
+
+  <p>Page {{ currentTheme.currentPage }} of {{ currentTheme.totalPages }}</p>
+  {% if currentTheme.totalPages > 1 %}
+    <nav>
+      <ul>
+        {% if currentTheme.href.previous %}
+          <li><a href="/blog/theme/{{ currentTheme.href.first }}">First</a></li>
+          <li><a href="/blog/theme/{{ currentTheme.href.previous }}">Previous</a></li>
+        {% endif %}
+        {% if currentTheme.href.next %}
+          <li><a href="/blog/theme/{{ currentTheme.href.next }}">Next</a></li>
+          <li><a href="/blog/theme/{{ currentTheme.href.last }}">Last</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+
+  {% if collections.blogpostsCategories|length %}
+    <h2>Categories</h2>
+    {% for category in collections.blogpostsCategories %}
+      {% if loop.first %}<ul>{% endif %}
+      {% if loop.first %}
+        {% set totalBlogposts = collections.blogposts|length %}
+        <li>
+          <a href="/blog/">All categories</a>
+        </li>
+      {% endif %}
+      <li>
+        <a href="/blog/category/{{ category.slug }}">{{ category.title }} ({{ category.totalItems }})</a>
+      </li>
+      {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if collections.blogpostsThemes|length %}
+    <h2>Themes</h2>
+    {% for theme in collections.blogpostsThemes %}
+      {% if loop.first %}<ul>{% endif %}
+      {% if loop.first %}
+        {% set totalBlogposts = collections.blogposts|length %}
+        <li>
+          <a href="/blog/">All themes</a>
+        </li>
+      {% endif %}
+      <li>
+        <a href="/blog/theme/{{ theme.slug }}">{{ theme.title }} ({{ theme.totalItems }})</a>
+      </li>
+      {% if loop.last %}</ul>{% endif %}
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}

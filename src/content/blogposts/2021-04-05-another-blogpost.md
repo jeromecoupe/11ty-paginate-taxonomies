@@ -1,6 +1,7 @@
 ---
-title: another awesome blogpost
-categories: [test, travels, awesomeness]
+title: another blogpost
+categories: ["test", "travels", "awesomeness", "javascript"]
+themes: ["life"]
 ---
 
 this is the content

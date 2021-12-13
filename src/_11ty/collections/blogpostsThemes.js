@@ -5,5 +5,5 @@ module.exports = (collection) => {
   let blogposts = collection.getFilteredByGlob("./src/content/blogposts/*.md");
 
   // get unique categories from target collection
-  return getCollectionKeyValues(blogposts, "categories");
+  return getCollectionKeyValues(blogposts, "themes");
 };

@@ -9,5 +9,5 @@ module.exports = function (collection) {
   let blogposts = collection.getFilteredByGlob("./src/content/blogposts/*.md");
 
   // paginated collection by categories
-  return chunkCollectionByKey(blogposts, "categories", ITEMS_PER_PAGE);
+  return chunkCollectionByKey(blogposts, "themes", ITEMS_PER_PAGE);
 };

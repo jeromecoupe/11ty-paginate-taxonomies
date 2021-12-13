@@ -7,7 +7,7 @@ permalink: index.html
 {% block content %}
   <h1>Hello world</h1>
 
-  {% for category in collections.blogCategories %}
+  {% for category in collections.blogpostsCategories %}
     {% if loop.first %}<ul>{% endif %}
     <li>
       <a href="/blog/category/{{ category.slug }}">{{ category.title }} ({{ category.totalItems }})</a>

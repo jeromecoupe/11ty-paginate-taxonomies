@@ -1,6 +1,7 @@
 ---
-title: an earlier blogpost
-categories: [test, travels, javascript, électrique]
+title: earlier blogpost
+categories: ["test", "travels", "javascript", "électrique"]
+themes: ["development"]
 ---
 
-this is the content
+this is the con©tent
