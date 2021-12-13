@@ -5,13 +5,7 @@ permalink: index.html
 {% extends "layouts/base.njk" %}
 
 {% block content %}
-  <h1>Hello world</h1>
-
-  {% for category in collections.blogpostsCategories %}
-    {% if loop.first %}<ul>{% endif %}
-    <li>
-      <a href="/blog/category/{{ category.slug }}">{{ category.title }} ({{ category.totalItems }})</a>
-    </li>
-    {% if loop.last %}</ul>{% endif %}
-  {% endfor %}
+  <h1>Proof of concept</h1>
+  <p>Creating <a href="https://www.webstoemp.com/blog/basic-custom-taxonomies-with-eleventy/">custom taxonomies with Eleventy</a></p>
+  <p><a href="/blog/">&rarr; Sample implementation</a></p>
 {% endblock %}
