@@ -72,22 +72,18 @@ module.exports = (collection, key, itemsPerPage = 10) => {
   // walk unique key values
   uniqueKeyValues.forEach((value) => {
     // get posts with value in targetted key values
-    let itemsWithKeyValues = collection.filter(
-      (item) => key in item.data && item.data[key].includes(value.title)
+    let itemsWithKeyValues = collection.filter((item) =>
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+      item.data[key]?.includes(value.title)
     );
 
     // chunk posts in category to create pages (lodash)
     let chunkedCollection = chunk(itemsWithKeyValues, itemsPerPage);
 
     // create array of slugs
-    let slugs = [];
-    for (let i = 1; i <= chunkedCollection.length; i++) {
-      let slug = `${value.slug}/${i}`;
-      if (i === 1) {
-        slug = value.slug;
-      }
-      slugs.push(slug);
-    }
+    let slugs = chunkedCollection.map((item, index) => {
+      return index > 0 ? `${value.slug}/${index + 1}` : value.slug;
+    });
 
     // add formatted objects to empty array
     chunkedCollection.forEach((items, index) => {

@@ -1,18 +1,4 @@
-const slugify = require("slugify");
-
-/**
- * Transforms a string into a slug
- * @param {Sring} str string to slugify
- * @returns slugified string
- */
-const strToSlug = (str) => {
-  const options = {
-    replacement: "-",
-    remove: /[&,+()$~%.'":*?<>{}]/g,
-  };
-
-  return slugify(str, options);
-};
+const slugifyString = require("./slugifyString");
 
 /**
  * Returns array of unique key values for passed collection
@@ -33,13 +19,14 @@ const uniqueKeyValues = (collection, key) => {
 
   // format and return array of value objects
   let valuesObjects = uniqueValues.map((value) => {
-    let postsWithValue = collection.filter(
-      (item) => key in item.data && item.data[key].includes(value)
+    let postsWithValue = collection.filter((item) =>
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining
+      item.data[key]?.includes(value)
     );
 
     return {
       title: value,
-      slug: strToSlug(value),
+      slug: slugifyString(value),
       totalItems: postsWithValue.length,
     };
   });
